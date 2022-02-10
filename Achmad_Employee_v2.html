@@ -67,6 +67,23 @@
       <button onclick="searchEmployees()">Search Employee</button>
     </fieldset>
 
+    <fieldset>
+      <legend>Sort Employee</legend>
+      <label for="sortOrder">Order</label>
+      <select id="sortOrder">
+        <option value="ascending">Ascending</option>
+        <option value="descending">Descending</option>
+      </select>
+      <br />
+      <br />
+      <button onclick="sortEmployeeName()">Sort Employee By Name</button>
+      <button onclick="sortEmployeeAge()">Sort Employee By Age</button>
+      <button onclick="sortReset()">Reset Sort</button>
+    </fieldset>
+
+    <br />
+    <br />
+
     <table>
       <caption>
         Employee Database
@@ -104,8 +121,8 @@
       let employeeDatabase = [
         new Employee("Mark", "Software Developer", "mark@mail.com", 17),
         new Employee("Steve", "Digital Marketer", "steve@mail.com", 21),
-        new Employee("Bill", "UI/UX", "bill@mail.com", 13),
-        new Employee("Seto", "Data Scientist", "seto@mail.com", 30),
+        new Employee("Naruto", "UI/UX", "Naruto@mail.com", 16),
+        new Employee("Luffy", "Data Scientist", "Luffy@mail.com", 18),
       ]
 
       const renderData = (dataToRender = []) => {
@@ -158,6 +175,56 @@
 
         renderData(filteredData)
       }
+
+      let sortingEmployee = [...employeeDatabase]
+      
+      const sortEmployeeName = () => {
+        let orderOfSort = document.getElementById("sortOrder").value
+        let sortedEmployeeName = []
+
+        if (orderOfSort == "descending") {
+          sortedEmployeeName = sortingEmployee.sort((a, b) => {
+            if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
+              return -1
+            } else if (a.fullName.toLowerCase() < b.fullName.toLowerCase()) {
+              return 1
+            }
+          })
+        } else if (orderOfSort == "ascending") {
+          sortedEmployeeName = sortingEmployee.sort((a, b) => {
+            if (a.fullName.toLowerCase() < b.fullName.toLowerCase()) {
+              return -1
+            } else if (a.fullName.toLowerCase() > b.fullName.toLowerCase()) {
+              return 1
+            }
+          })
+        }
+
+        renderData(sortedEmployeeName)
+      }
+
+      const sortEmployeeAge = () => {
+        let orderOfSort = document.getElementById("sortOrder").value
+        let sortedEmployeeAge = []
+
+        if (orderOfSort == "descending") {
+          sortedEmployeeAge = sortingEmployee.sort((a, b) => {
+            return b.age - a.age
+          })
+        }else if (orderOfSort == "ascending") {
+          sortedEmployeeAge = sortingEmployee.sort((a, b) => {
+            return a.age - b.age
+          })
+        }
+        renderData(sortedEmployeeAge)
+      }
+
+      const sortReset = () => {
+        renderData(employeeDatabase)
+      }
+
+      
+
     </script>
   </body>
 </html>
