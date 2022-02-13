@@ -15,27 +15,27 @@
         border: 1.5px solid black;
       }
     </style>
-    <fieldset>
+    <fieldset class="mb-3">
       <legend>Employee Information</legend>
-      <label for="firstName">First name:</label>
-      <input type="text" id="firstName" name="firstName" />
+      <label for="firstName" class="form-label">First name:</label>
+      <input type="text" class="form-control" placeholder="Nama depan anda" id="firstName" name="firstName" />
       <br />
       <!-- hello -->
       <br />
-      <label for="lastName">Last name:</label>
-      <input type="text" id="lastName" name="lastName" />
+      <label for="lastName" class="form-label">Last name:</label>
+      <input type="text" class="form-control" placeholder="Nama belakang anda" id="lastName" name="lastName" />
       <br />
       <br />
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" />
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" class="form-control" placeholder="Contoh@gmail.com" id="email" name="email" />
       <br />
       <br />
-      <label for="age">Age:</label>
-      <input type="number" id="age" name="age" />
+      <label for="age" class="form-label">Age:</label>
+      <input type="number" class="form-control" placeholder="Umur anda" id="age" name="age" />
       <br />
       <br />
       <label for="occupation">Occupation</label>
-      <select id="occupation">
+      <select class="form-select" aria-label="Disabled select example" id="occupation">
         <option>Software Developer</option>
         <option>UI/UX</option>
         <option>Digital Marketer</option>
@@ -43,19 +43,19 @@
       </select>
       <br />
       <br />
-      <button onclick="addData()">Create Data</button>
+      <button class="btn btn-primary" onclick="addData()">Create Data</button>
     </fieldset>
 
     <br />
 
     <fieldset>
       <legend>Search Employee</legend>
-      <label for="searchName">Employee Name:</label>
-      <input type="text" id="searchName" name="searchName" />
+      <label for="searchName" class="form-label">Employee Name:</label>
+      <input class="form-control" type="text" id="searchName" name="searchName" />
       <br />
       <br />
       <label for="searchOccupation">Occupation</label>
-      <select id="searchOccupation">
+      <select class="form-select" aria-label="Disabled select example" id="searchOccupation">
         <option value="">All Occupations</option>
         <option>Software Developer</option>
         <option>UI/UX</option>
@@ -84,7 +84,7 @@
     <br />
     <br />
 
-    <table>
+    <table class="table table-striped table-hover">
       <caption>
         Employee Database
       </caption>
@@ -95,7 +95,6 @@
           <th>Email</th>
           <th>Occupation</th>
           <th>Age</th>
-          <th colspan="2">Action</th>
         </tr>
       </thead>
 
