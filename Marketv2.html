@@ -133,7 +133,7 @@
 
       const totalCheckOut = () => {
         let totalBelanja = 0;
-        baju.forEach((val) => {
+        baju.forEach((val, idx) => {
           totalBelanja += val.calculateTotalPrice();
         });
         return totalBelanja;
@@ -154,7 +154,6 @@
         <br>
         <button class="btn btn-primary" onclick="bayar()">Bayar</button>
         `;
-        renderData();
       };
 
       let decrement;
@@ -213,7 +212,14 @@
           document.getElementById("jumlahUang").value = ""
           return;
         }
-        restart(true)
+
+        baju.forEach((val, idx) => {
+            val.stockProduk -= val.jumlahProduk
+            val.jumlahProduk = 0
+        })
+
+        restart()
+        renderData()
     
       };
     </script>
