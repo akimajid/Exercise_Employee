@@ -27,7 +27,7 @@
       <tbody id="katalogBaju"></tbody>
     </table>
     <center>
-      <button onclick="checkOut()" class="btn btn-success">Checkout</button>
+      <button onclick="checkOut()" class="btn btn-primary">Checkout</button>
       <br />
       <br />
       <h3 id="showTotal"></h3>
@@ -40,7 +40,6 @@
           namaProduk,
           hargaProduk,
           stockProduk,
-          jumlahProduk
         ) {
           this.gambar = gambar;
           this.namaProduk = namaProduk;
@@ -101,8 +100,8 @@
         <td>Rp.${val.hargaProduk.toLocaleString()}</td>
         <td>${val.stockProduk}</td>
         <td>${val.jumlahProduk}</td>
-        <td><button class="btn btn-secondary" id="min" onclick="minProduk(${idx})">-</button></td>
-        <td><button class="btn btn-secondary" id="plus" onclick="plusProduk(${idx})">+</button></td>
+        <td><button class="btn btn-danger" id="min" onclick="minProduk(${idx})">-</button></td>
+        <td><button class="btn btn-success" id="plus" onclick="plusProduk(${idx})">+</button></td>
             </tr>
              `;
         });
