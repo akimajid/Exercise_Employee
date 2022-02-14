@@ -39,12 +39,7 @@
 
     <script>
       class Product {
-        constructor(
-          gambar,
-          namaProduk,
-          hargaProduk,
-          stockProduk,
-        ) {
+        constructor(gambar, namaProduk, hargaProduk, stockProduk) {
           this.gambar = gambar;
           this.namaProduk = namaProduk;
           this.hargaProduk = hargaProduk;
@@ -136,48 +131,75 @@
         renderData();
       };
 
-      const checkOut = () => {
-        startTimer()
+      const totalCheckOut = () => {
         let totalBelanja = 0;
-        let totalHarga = `Total belanja anda Rp.`;
-
         baju.forEach((val) => {
           totalBelanja += val.calculateTotalPrice();
-          val.checkOut();
         });
+        return totalBelanja;
+      };
 
-        document.getElementById("showTotal").innerHTML =
-          totalHarga + totalBelanja.toLocaleString();
+      const checkOut = () => {
+        startTimer();
+        let totalBelanja = totalCheckOut();
+        let totalHarga = `Total belanja anda Rp.`;
 
-        
+        totalHarga += totalBelanja.toLocaleString();
+
+        document.getElementById("showTotal").innerHTML = totalHarga;
+
         document.getElementById("bayar").innerHTML = `
         <label for="jumlahUang">Jumlah uang anda:</label>
         <input type="number" class="form-control" id="jumlahUang">
         <br>
-        <button class="btn btn-primary" onclick="">Bayar</button>
-        `
+        <button class="btn btn-primary" onclick="bayar()">Bayar</button>
+        `;
         renderData();
       };
 
-      let decrement
+      let decrement;
 
       const startTimer = () => {
-          let timer = 16
-          decrement = setInterval(() => {
-              timer -= 1
-              document.getElementById("timer").innerHTML = `Waktu anda tinggal: ${timer}`
+        let timer = 16;
+        decrement = setInterval(() => {
+          timer -= 1;
+          document.getElementById(
+            "timer"
+          ).innerHTML = `Waktu anda tinggal: ${timer}`;
 
-              if (timer == 0) {
-                  clearInterval(decrement)
-                  alert("Anda melewati batas waktu!")
-                  document.getElementById("timer").innerHTML = ""
-                  document.getElementById("showTotal").innerHTML = ""
-                  document.getElementById("input").innerHTML = ""
-              }
-          },1000)
+          if (timer == 0) {
+            clearInterval(decrement);
+            alert("Anda melewati batas waktu!");
+            document.getElementById("timer").innerHTML = "";
+            document.getElementById("showTotal").innerHTML = "";
+            document.getElementById("input").innerHTML = "";
+          }
+        }, 1000);
+      };
 
-          renderData()
-      }
+      const bayar = () => {
+        let totalBayar = document.getElementById("jumlahUang").value;
+        totalBayar = parseInt(totalBayar);
+
+        if (totalBayar > totalCheckOut()) {
+          alert(
+            `Kembalian anda sebesar Rp.${(
+              totalBayar - totalBelanja
+            ).toLocaleString()}`
+          );
+        } else if (totalBayar == totalCheckOut()) {
+          alert("Terimakasih, datang kembali!");
+        } else if (totalBayar < totalCheckOut()) {
+          alert(
+            `Uang anda kurang Rp.${(
+              totalBayar - totalCheckOut
+            ).toLocaleString()}`
+          );
+          document.getElementById("jumlahUang").value = ""
+          return;
+        }
+    
+      };
     </script>
   </body>
 </html>
