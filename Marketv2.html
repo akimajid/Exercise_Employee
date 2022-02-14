@@ -159,6 +159,21 @@
 
       let decrement;
 
+      const restart = (isBayar) => {
+        clearInterval(decrement);   
+        document.getElementById("timer").innerHTML = "";
+        document.getElementById("showTotal").innerHTML = "";
+        document.getElementById("bayar").innerHTML = "";
+
+        if (isBayar) {
+            baju.forEach((val) => {
+                val.calculateTotalPrice()
+            })
+            renderData()
+            return
+        }
+      }
+
       const startTimer = () => {
         let timer = 16;
         decrement = setInterval(() => {
@@ -168,11 +183,11 @@
           ).innerHTML = `Waktu anda tinggal: ${timer}`;
 
           if (timer == 0) {
-            clearInterval(decrement);
+            clearInterval(decrement);   
             alert("Anda melewati batas waktu!");
             document.getElementById("timer").innerHTML = "";
             document.getElementById("showTotal").innerHTML = "";
-            document.getElementById("input").innerHTML = "";
+            document.getElementById("bayar").innerHTML = "";
           }
         }, 1000);
       };
@@ -184,7 +199,7 @@
         if (totalBayar > totalCheckOut()) {
           alert(
             `Kembalian anda sebesar Rp.${(
-              totalBayar - totalBelanja
+              totalBayar - totalCheckOut()
             ).toLocaleString()}`
           );
         } else if (totalBayar == totalCheckOut()) {
@@ -192,12 +207,13 @@
         } else if (totalBayar < totalCheckOut()) {
           alert(
             `Uang anda kurang Rp.${(
-              totalBayar - totalCheckOut
+              totalBayar - totalCheckOut()
             ).toLocaleString()}`
           );
           document.getElementById("jumlahUang").value = ""
           return;
         }
+        restart(true)
     
       };
     </script>
