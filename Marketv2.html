@@ -137,7 +137,7 @@
       };
 
       const checkOut = () => {
-        
+        startTimer()
         let totalBelanja = 0;
         let totalHarga = `Total belanja anda Rp.`;
 
@@ -158,6 +158,26 @@
         `
         renderData();
       };
+
+      let decrement
+
+      const startTimer = () => {
+          let timer = 16
+          decrement = setInterval(() => {
+              timer -= 1
+              document.getElementById("timer").innerHTML = `Waktu anda tinggal: ${timer}`
+
+              if (timer == 0) {
+                  clearInterval(decrement)
+                  alert("Anda melewati batas waktu!")
+                  document.getElementById("timer").innerHTML = ""
+                  document.getElementById("showTotal").innerHTML = ""
+                  document.getElementById("input").innerHTML = ""
+              }
+          },1000)
+
+          renderData()
+      }
     </script>
   </body>
 </html>
