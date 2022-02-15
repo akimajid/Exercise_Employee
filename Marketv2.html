@@ -144,6 +144,12 @@
         let totalBelanja = totalCheckOut();
         let totalHarga = `Total belanja anda Rp.`;
 
+        if (totalBelanja == 0) {
+          alert("Anda belum membeli apapun!")
+          clearInterval(decrement)
+          return
+        }
+
         totalHarga += totalBelanja.toLocaleString();
 
         document.getElementById("showTotal").innerHTML = totalHarga;
